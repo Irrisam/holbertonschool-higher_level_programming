@@ -9,10 +9,10 @@ else:
     numberf = number
 
 if numberf % 10 == 0:
-    print(f"The last digit of {number} is {numberf % 10} and is 0")
+    print(f"Last digit of {number} is {numberf % 10} and is 0")
 
 elif numberf % 10 > 5:
-    print(f"The last digit of {number} is {numberf % 10} and is greater than 5")
+    print(f"Last digit of {number} is {numberf % 10} and is greater than 5")
 
 elif numberf % 10 < 6 and numberf % 10 != 0:
-    print(f"The last digit of {number} is {numberf % 10} and is less than 6 and not 0")
+    print(f"Last digit of {number} is {numberf % 10} and is less than 6 and not 0")

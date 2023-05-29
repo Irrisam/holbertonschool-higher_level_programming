@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 coma = "0"
-for i in range(0, 99):
+for i in range(0, 100):
     if i > 9:
         coma = ", "
     print(f"{coma}{i}", end="")

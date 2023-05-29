@@ -12,8 +12,8 @@ comparer = numberf % 10
 if comparer == 0:
     print(f"Last digit of {number} is {numberf % 10} and is 0")
 
-elif comparer > 5:
-    print(f"Last digit of {number} is {numberf % 10} and is greater than 5")
-
 elif comparer < 6 and comparer != 0:
     print(f"Last digit of {number} is {comparer} and is less than 6 and not 0")
+
+else:
+    print(f"Last digit of {number} is {numberf % 10} and is greater than 5")

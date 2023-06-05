@@ -4,11 +4,11 @@ def element_at(my_list, idx):
     Print index.
 
     Args:
-        my_list (_type_): List of element to print from
-        idx (_type_): Index of element to print
+        my_list (list): List of element to print from
+        idx (index): Index of element to print
 
     Returns:
-        _type_: None on error
+       None on error
     """
     if idx < 0 or idx > len(my_list):
         return (None)

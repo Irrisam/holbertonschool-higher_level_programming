@@ -11,5 +11,5 @@ def element_at(my_list, idx):
        None on error
     """
     if idx < 0 or idx > len(my_list):
-        return (None)
+        return None
     print("Element at index {:d} is {:d}".format(idx, len(my_list)))

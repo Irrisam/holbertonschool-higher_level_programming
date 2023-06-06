@@ -6,5 +6,5 @@ def print_matrix_integer(matrix=[[]]):
         sep = ""
         for element in row:
             print("{}{:d}".format(sep, element), end='')
-            sep = ", "
+            sep = " "
         print()

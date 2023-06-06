@@ -10,6 +10,8 @@ def element_at(my_list, idx):
     Returns:
        None on error
     """
-    if idx < 0 or idx > len(my_list):
-        return None
-    print("Element at index {:d} is {:d}".format(idx, len(my_list)))
+    if __name__ == "__main__":
+        if idx < 0 or idx >= len(my_list):
+            return None
+        print("Element at index {:d} is {:d}".format(idx, len(my_list)))
+        return

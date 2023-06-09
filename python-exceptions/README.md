@@ -1,0 +1,1 @@
+Exception project for Python, seems like a lot of fun!

@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+class perso:
+    def __init__(self, name, level, role, race):
+        self.name = name
+        self.level = level
+        self.role = role
+        self.race = race
+
+    def lvlup(self):
+        self.level += 1
+        print("{} level up to {}\n".format(self.name, self.level))
+
+    def death(self):
+        print("{} just DIED\n".format(self.name))
+
+    def intro(self):
+        print("{} is a {} and is a {}, currently at level {}\n".format(self.name, self.role, self.race, self.level))
+
+
+def main():
+    Bhai = perso("Bhai", 89, "Healer", "Elio")
+    Bhra = perso("Bhra", 109, "DPS", "Cra")
+    Bhra.lvlup()
+    Bhra.intro()
+
+
+if __name__ == "__main__":
+    main()

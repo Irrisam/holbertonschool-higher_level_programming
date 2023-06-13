@@ -1,17 +1,22 @@
 #!/usr/bin/python3
-"""A module with as simple empty Square class"""
+"""A module with as simple empty Square class."""
 
 
 class Square:
     """Class defining a square."""
 
     def __init__(self, size=0):
-        """Defines square."""
+        """Define square."""
         self.__size = 0
         self.__size = size
 
     @property
     def size(self):
+        """give access to hidden data
+
+        Returns:
+            Integer: size value
+        """
         return self.__size
 
     @size.setter
@@ -32,8 +37,7 @@ class Square:
         return self.__size ** 2
 
     def my_print(self):
-        """Printing # for the squares
-        """
+        """Printing # for the squares"""
         for i in range(self.size):
             if self.size != 0:
                 print("#" * self.size)

@@ -1,50 +1,35 @@
-# Test Cases for add_integer
+The 0-add_integer module
+========================
 
-# Test Case 1
-# Description: Testing addition of two positive integers
-# Input: 1, 2
-# Expected Output: 3
-# Reason: The sum of 1 and 2 is 3.
-Expected Output: 3
-assert add_integer(1, 2) == 3
+Using add_integer
+-----------------
 
-# Test Case 2
-# Description: Testing addition of a positive integer and a negative integer
-# Input: 100, -2
-# Expected Output: 98
-# Reason: The sum of 100 and -2 is 98.
-assert add_integer(100, -2) == 98
+First import add_integer from the 0-add_integer module:
 
-# Test Case 3
-# Description: Testing addition of one positive integer (default value of the second integer is 0)
-# Input: 2
-# Expected Output: 2
-# Reason: The sum of 2 and 0 is 2.
-assert add_integer(2) == 2
+    >>> add_integer = __import__('0-add_integer').add_integer
 
-# Test Case 4
-# Description: Testing addition of a float and a negative integer
-# Input: 100.3, -2
-# Expected Output: 98
-# Reason: The sum of 100.3 and -2 is 98 (the float value is converted to an integer).
-assert add_integer(100.3, -2) == 98
+Now use it:
 
-# Test Case 5
-# Description: Testing addition of an integer and a string
-# Input: 4, "School"
-# Expected Output: TypeError: unsupported operand type(s) for +: 'int' and 'str'
-# Reason: The addition operation is not supported between an integer and a string.
-try:
-    add_integer(4, "School")
-except TypeError as e:
-    assert str(e) == "unsupported operand type(s) for +: 'int' and 'str'"
+    >>> add_integer(1, 2)
+    3
 
-# Test Case 6
-# Description: Testing addition with None as an argument
-# Input: None
-# Expected Output: TypeError: unsupported operand type(s) for +: 'int' and 'NoneType'
-# Reason: The addition operation is not supported between an integer and None.
-try:
-    add_integer(None)
-except TypeError as e:
-    assert str(e) == "unsupported operand type(s) for +: 'int' and 'NoneType'"
+    >>> add_integer(100, -2)
+    98
+
+    >>> add_integer(2)
+    100
+
+    >>> add_integer(100.3, -2)
+    98
+
+    >>> add_integer(4, "School")
+    TypeError('b must be an integer')
+
+    >>> add_integer(None)
+    TypeError('a must be an integer')
+
+    >>> add_integer(3.2, 4.12)
+    7
+
+    >>> add_integer("Holbies", 3.2)
+    TypeError('a must be an integer')

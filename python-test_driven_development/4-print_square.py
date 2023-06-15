@@ -15,4 +15,4 @@ def print_square(size):
             print()
 
 
-print_square(-1.2)
+print_square()

@@ -1,0 +1,29 @@
+The 3-say_my_name module
+========================
+
+Using say_my_name
+-----------------
+
+First import add_integer from the 0-add_integer module:
+
+    >>> add_integer = __import__('3-say_my_name').say_my_name
+
+Now use it:
+
+    >>> say_my_name("ben", "jmain")
+    ben jmain
+
+    >>> say_my_name("ben", 5)
+    Traceback (most recent call last):
+    TypeError: last_name must be a string
+
+    >>>  say_my_name(5, "jmain")
+    Traceback (most recent call last):
+    TypeError: first_name must be a string
+
+    >>> say_my_name("ben, "")
+    ben
+
+    >>> add_integer("", "jmain")
+     jmain
+

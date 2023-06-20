@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""check for inheritance"""
+
+
 def inherits_from(obj, a_class):
     """check for inheritance
 

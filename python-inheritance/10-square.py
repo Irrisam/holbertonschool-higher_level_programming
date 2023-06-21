@@ -91,7 +91,7 @@ class Square(Rectangle):
         Returns: a formatted string
         """
         return "[Rectangle] {}/{}".format(self.__size, self.__size)
-    
+
     def area(self):
         """A public instance method that coputes
         the rectangle area

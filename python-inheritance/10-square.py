@@ -74,14 +74,19 @@ class Rectangle(BaseGeometry):
 
 
 class Square(Rectangle):
+    """A class representing a square"""
 
     def __init__(self, size):
-        """init for a square
+        """A constructor method that initializes a new square object
+        with private instance attribute after validation that the value
+        is a positive integer
 
         Args:
-            size (int): size of square
+            size (int): the size of the Rectangle
+
+        Returns: nothing
         """
-        super().integer_validator(self, size)
+        super().integer_validator("size", size)
         self.__size = size
 
     def __str__(self):

@@ -4,7 +4,6 @@
 
 class BaseGeometry():
     """A base geometry class"""
-    
 
     def area(self):
         """A public instance method that raises an Exception

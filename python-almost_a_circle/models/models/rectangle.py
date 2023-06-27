@@ -1,30 +1,29 @@
 #!/usr/bin/python3
 """shebangs indeed"""
 
+from models.base import Base
 
-class Base:
-    """Base class of program
-        Args: nb_objects: deals with number of instances
+
+class Rectangle(Base):
+    """rectangle class
+
+    Args:
+        Base (class): parent class
     """
-    nb_objects = 0
-
-    def __init__(self, id=None, width=0, height=0, x=0, y=0):
-        """initialized instances
+    def __init__(self, width, height, x=0, y=0, id=None):
+        """initializes instances of rectangles
 
         Args:
-            id (int,optional): tracks id of different shapes. Defaults to None.
+            width (int): rectangle width
+            height (int): rectangle height
+            x (int, optional): x axis. Defaults to 0.
+            y (int, optional): y axis. Defaults to 0.
+            id (int, optional): shape's id. Defaults to None.
         """
-        self.__id = id
         self.__width = width
         self.__height = height
         self.__x = x
         self.__y = y
-
-        if id is not None:
-            self.id = id
-        else:
-            Base.nb_objects += 1
-            self.id = Base.nb_objects
 
     @property
     def width(self):
@@ -65,3 +64,5 @@ class Base:
     def y(self, value):
         """y setter"""
         self.y = value
+
+        super().__init__(id)

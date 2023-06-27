@@ -1,1 +1,0 @@
-Hello, almost a circle on progress!

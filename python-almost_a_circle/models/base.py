@@ -6,7 +6,7 @@ class Base:
     """Base class of program
         Args: nb_objects: deals with number of instances
     """
-    nb_objects = 0
+    __nb_objects = 0
 
     def __init__(self, id=None):
         """initialized instances

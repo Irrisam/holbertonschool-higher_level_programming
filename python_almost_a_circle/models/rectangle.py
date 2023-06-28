@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """shebangs indeed"""
 
-from models.base import Base
+from base import Base
 
 
 class Rectangle(Base):
@@ -20,6 +20,7 @@ class Rectangle(Base):
             y (int, optional): y axis. Defaults to 0.
             id (int, optional): shape's id. Defaults to None.
         """
+        super().__init__(id)
         self.__width = width
         self.__height = height
         self.__x = x
@@ -64,5 +65,3 @@ class Rectangle(Base):
     def y(self, value):
         """y setter"""
         self.y = value
-
-        super().__init__(id)

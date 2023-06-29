@@ -127,7 +127,7 @@ class Rectangle(Base):
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.x, self.y, self.width, self.height)
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """updates values of rectangle
         """
         if len(args) >= 1 and args[0] is not None:
@@ -140,3 +140,14 @@ class Rectangle(Base):
             self.x = args[3]
         if len(args) >= 5 and args[4] is not None:
             self.y = args[4]
+        if kwargs:
+            if "id" in kwargs and kwargs["id"] is not None:
+                self.id = kwargs["id"]
+            if "width" in kwargs and kwargs["width"] is not None:
+                self.width = kwargs["width"]
+            if "height" in kwargs and kwargs["height"] is not None:
+                self.height = kwargs["height"]
+            if "x" in kwargs and kwargs["x"] is not None:
+                self.x = kwargs["x"]
+            if "y" in kwargs and kwargs["y"] is not None:
+                self.y = kwargs["y"]

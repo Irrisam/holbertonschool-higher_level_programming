@@ -3,6 +3,7 @@
 
 import json
 
+
 class Base:
     """Base class of program
         Args: nb_objects: deals with number of instances
@@ -35,5 +36,3 @@ class Base:
             return "[]"
         else:
             return json.dumps(list_dictionaries)
-        
-        

@@ -113,3 +113,10 @@ class Rectangle(Base):
                 print("#", end="")
             j = 0
             print()
+
+    def __str__(self):
+        """The __str__ method in Python represents the class
+        object as a customized string
+        Returns: a formatted string"""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(
+            self.id, self.x, self.y, self.width, self.height)

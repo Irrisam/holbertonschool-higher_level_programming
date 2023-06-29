@@ -36,3 +36,14 @@ class Base:
             return "[]"
         else:
             return json.dumps(list_dictionaries)
+
+    def save_to_file(cls, list_objs):
+        """save to file to sace to a file withot dump methos
+
+        Args:
+            list_objs (list): cont  ins squares and rectangles
+        """
+        filename = cls.__name__ + ".json"
+        data = cls.to_json_string(list_objs) if list_objs is not None else "[]"
+        with open(filename, "r") as file:
+            file.write(data)

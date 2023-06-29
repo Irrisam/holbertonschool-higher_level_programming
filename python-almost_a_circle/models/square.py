@@ -11,7 +11,7 @@ class Square(Rectangle):
         Rectangle (parent class): parent class used to derive for a square
     """
     def __init__(self, size, x=0, y=0, id=None):
-        """initialization of square instances 
+        """initialization of square instances
 
         Args:
             size (int): size of square
@@ -42,3 +42,24 @@ class Square(Rectangle):
     def size(self, value):
         self.width = value
         self.height = value
+        
+    def update(self, *args, **kwargs):
+        """updates values of rectangle
+        """
+        if len(args) >= 1 and args[0] is not None:
+            self.id = args[0]
+        if len(args) >= 2 and args[1] is not None:
+            self.size = args[1]
+        if len(args) >= 3 and args[2] is not None:
+            self.x = args[2]
+        if len(args) >= 4 and args[3] is not None:
+            self.y = args[3]
+        if kwargs:
+            if "id" in kwargs and kwargs["id"] is not None:
+                self.id = kwargs["id"]
+            if "size" in kwargs and kwargs["size"] is not None:
+                self.size = kwargs["size"]
+            if "x" in kwargs and kwargs["x"] is not None:
+                self.x = kwargs["x"]
+            if "y" in kwargs and kwargs["y"] is not None:
+                self.y = kwargs["y"]

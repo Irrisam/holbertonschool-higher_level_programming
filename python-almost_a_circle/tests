@@ -10,11 +10,3 @@ if __name__ == "__main__":
     print(type(dictionary))
     print(json_dictionary)
     print(type(json_dictionary))
-
-
-
-    def save_to_file(cls, list_objs):
-        filename = cls.__name__ + ".json"
-        data = cls.to_json_string(list_objs) if list_objs is not None else "[]"
-        with open(filename, "r") as file:
-            file.write(data)

@@ -1,49 +1,94 @@
 #!/usr/bin/python3
-"""shebangs indeed"""
-
+"""Base class"""
 import json
+import os
 
 
 class Base:
-    """Base class of program
-        Args: nb_objects: deals with number of instances
+    """Class Base : The "base” of all other classes
+
+    Attributes:
+        __nb_objects (int): The number of instantiated Bases
     """
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """initialized instances
+        """Initialize a new Base
 
         Args:
-            id (int,optional): tracks id of different shapes. Defaults to None.
+            id (int): The identity of the new Base
         """
-
         if id is not None:
             self.id = id
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
 
+    @staticmethod
     def to_json_string(list_dictionaries):
-        """returns json value of object in json
+        """Returns the JSON string representation of list_dictionaries
 
         Args:
-            list_dictionaries (list): returns string repr of shapes
-
-        Returns:
-            string: repr of object in json
+            list_dictionaries (list): A list of dictionaries
         """
-        if list_dictionaries is None or []:
+        if list_dictionaries is None or list_dictionaries == []:
             return "[]"
-        else:
-            return json.dumps(list_dictionaries)
+        return json.dumps(list_dictionaries)
 
+    @classmethod
     def save_to_file(cls, list_objs):
-        """save to file to sace to a file withot dump methos
+        """Writes the JSON string representation of list_objs to a file
 
         Args:
-            list_objs (list): cont  ins squares and rectangles
+            list_objs (list): A list of instances who inherits of Base
+            (ex: list of Rectangle or list of Square instances)
         """
+        list_data = []
+        if list_objs is None:
+            list_data = []
+        else:
+            list_data = [obj.to_dictionary() for obj in list_objs]
+
+        with open((cls.__name__ + ".json"), "w", encoding='utf-8') as f:
+            f.write(cls.to_json_string(list_data))
+
+    @staticmethod
+    def from_json_string(json_string):
+        """Returns the list of the JSON string representation json_string
+
+        Args:
+            json_string (str): A JSON str representation of a list of dicts
+        """
+        if json_string is None:
+            return []
+        return json.loads(json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """Returns an instance with all attributes already set
+
+        Args:
+            **dictionary (dict): dict of set attributes
+        """
+        if cls.__name__ == "Rectangle":
+            """width and height are mandatory attributes"""
+            dummy = cls(1, 1)
+        else:
+            dummy = cls(1)
+        dummy.update(**dictionary)
+        return dummy
+
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances"""
         filename = cls.__name__ + ".json"
-        data = cls.to_json_string(list_objs) if list_objs is not None else "[]"
-        with open(filename, "r") as file:
-            file.write(data)
+        if not os.path.exists(filename):
+            return []
+
+        with open(filename, "r") as f:
+            file_content = f.read()
+
+        instances_dict = cls.from_json_string(file_content)
+        instances = [cls.create(**data) for data in instances_dict]
+
+        return instances

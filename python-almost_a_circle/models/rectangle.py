@@ -1,332 +1,143 @@
 #!/usr/bin/python3
-"""Unittest for Rectangle Class in rectangle.py"""
-import unittest
-from pathlib import Path
-import os
-import io
-import sys
+"""Rectangle class"""
 from models.base import Base
-from models.rectangle import Rectangle
 
 
-class Test_Rectangle_attribut(unittest.TestCase):
-    # tests on type attribut
+class Rectangle(Base):
+    """Class Rectangle : Inherits from Base"""
 
-    def test__widthType(self):
-        # test type width int
-        rect1 = Rectangle(2, 8, 1, 2)
-        self.assertTrue(type(rect1.width) is int)
+    def __init__(self, width, height, x=0, y=0, id=None):
+        """Initialize a new Base
 
-    def test__heightType(self):
-        # test type height int
-        rect1 = Rectangle(2, 8, 1, 2)
-        self.assertTrue(type(rect1.height) is int)
-
-    def test__xType(self):
-        # test type x int
-        rect1 = Rectangle(2, 8, 1, 2)
-        self.assertTrue(type(rect1.x) is int)
-
-    def test__yType(self):
-        # test type y int
-        rect1 = Rectangle(2, 8, 1, 2)
-        self.assertTrue(type(rect1.y) is int)
-
-
-class Test_Rectangle_attributRaise(unittest.TestCase):
-    # tests on raise on attribut
-
-    def test__widthTypeError(self):
-        # tests width not int
-        with self.assertRaises(TypeError)as e:
-            rect2 = Rectangle('2', 8, 1, 2)
-        self.assertEqual(str(e.exception), 'width must be an integer')
-
-    def test__widthValueError(self):
-        # tests width negativ number
-        with self.assertRaises(ValueError) as e:
-            rect3 = Rectangle(-2, 8, 0, 0)
-        self.assertEqual(str(e.exception), 'width must be > 0')
-
-    def test__widthValueError(self):
-        # tests width = 0
-        with self.assertRaises(ValueError) as e:
-            rect3 = Rectangle(0, 8, 0, 0)
-        self.assertEqual(str(e.exception), 'width must be > 0')
-
-    def test__heightTypeError(self):
-        # tests height not int
-        with self.assertRaises(TypeError) as e:
-            rect4 = Rectangle(2, '8', 0, 0)
-        self.assertEqual(str(e.exception), 'height must be an integer')
-
-    def test__heightValueError(self):
-        # tests height negativ number
-        with self.assertRaises(ValueError) as e:
-            rect4 = Rectangle(2, -8, 0, 0)
-        self.assertEqual(str(e.exception), 'height must be > 0')
-
-    def test__heightValueError(self):
-        # tests height = 0
-        with self.assertRaises(ValueError) as e:
-            rect4 = Rectangle(2, 0, 0, 0)
-        self.assertEqual(str(e.exception), 'height must be > 0')
-
-    def test__xTypeError(self):
-        # tests x not int
-        with self.assertRaises(TypeError) as e:
-            rect5 = Rectangle(2, 8, "8", 0)
-        self.assertEqual(str(e.exception), 'x must be an integer')
-
-    def test__yTypeError(self):
-        # tests y not int
-        with self.assertRaises(TypeError) as e:
-            rect6 = Rectangle(2, 8, 0, "5")
-        self.assertEqual(str(e.exception), 'y must be an integer')
-
-    def test__xValueError(self):
-        # tests x negativ number
-        with self.assertRaises(ValueError) as e:
-            rect7 = Rectangle(2, 8, -2, 0)
-        self.assertEqual(str(e.exception), 'x must be >= 0')
-
-    def test__yValueError(self):
-        # tests y negativ number
-        with self.assertRaises(ValueError) as e:
-            rect8 = Rectangle(2, 8, 2, -10)
-        self.assertEqual(str(e.exception), 'y must be >= 0')
-
-
-class Test_Rectangle_method(unittest.TestCase):
-    # tests on method
-
-    @staticmethod
-    def captureOutput(rect, method):
+        Args:
+            id (int): The identity of the new Rectangle
+            width (int): The width of the new Rectangle
+            height (int): The height of the new Rectangle
+            x (int): The x coordinate of the new Rectangle
+            y (int): The y coordinate of the new Rectangle
         """
-            Capture and return text printed in stdout
-            for method print and display
-        """
-        capture = io.StringIO()
-        sys.stdout = capture
-        if method == "print":
-            print(rect)
+        super().__init__(id)
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
+
+    @property
+    def width(self):
+        """Getter for width"""
+        return self.__width
+
+    @width.setter
+    def width(self, value):
+        """Setter for width"""
+        if type(value) is not int:
+            raise TypeError("width must be an integer")
+        if value <= 0:
+            raise ValueError("width must be > 0")
         else:
-            rect.display()
-        sys.stdout = sys.__stdout__
-        return (capture)
+            self.__width = value
 
-    def test_area(self):
-        # normal calcul of area
-        rect9 = Rectangle(2, 3)
-        self.assertEqual(Rectangle.area(rect9), 6)
+    @property
+    def height(self):
+        """Getter for height"""
+        return self.__height
 
-    def test_str(self):
-        # normal return str method
-        rect10 = Rectangle(2, 3, 0, 5, 8)
-        self.assertEqual(Rectangle.__str__(rect10),
-                         "[Rectangle] (8) 0/5 - 2/3")
+    @height.setter
+    def height(self, value):
+        """Setter for heigth"""
+        if type(value) is not int:
+            raise TypeError("height must be an integer")
+        if value <= 0:
+            raise ValueError("height must be > 0")
+        else:
+            self.__height = value
 
-    def test_RectangleDisplayWithoutXY(self):
-        # normal return display method without x, y
-        rect11 = Rectangle(1, 2)
-        capture = Test_Rectangle_method.captureOutput(rect11, "display")
-        self.assertEqual("#\n#\n", capture.getvalue())
-        self.assertEqual(rect11.x, 0)
-        self.assertEqual(rect11.y, 0)
+    @property
+    def x(self):
+        """Getter for x"""
+        return self.__x
 
-    def test_RectangleDisplayZeroXY(self):
-        # normal return display method without x and y
-        rect = Rectangle(3, 2, 0, 0)
-        capture = Test_Rectangle_method.captureOutput(rect, "display")
-        self.assertEqual('###\n###\n', capture.getvalue())
+    @x.setter
+    def x(self, value):
+        """Setter for x"""
+        if type(value) is not int:
+            raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
+        else:
+            self.__x = value
 
-    def test_RectangleDisplayXonly(self):
-        # normal return display method with only x
-        rect11 = Rectangle(1, 2, 4)
-        capture = Test_Rectangle_method.captureOutput(rect11, "display")
-        self.assertEqual("    #\n    #\n", capture.getvalue())
+    @property
+    def y(self):
+        """Getter for y"""
+        return self.__y
 
-    def test_RectangleDisplayYonly(self):
-        # normal return display method with only y
-        rect11 = Rectangle(1, 2, 0, 1)
-        capture = Test_Rectangle_method.captureOutput(rect11, "display")
-        self.assertEqual("\n#\n#\n", capture.getvalue())
+    @y.setter
+    def y(self, value):
+        """Setter for y"""
+        if type(value) is not int:
+            raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
+        else:
+            self.__y = value
 
-    def test_RectangleDisplayOneArg(self):
-        # return display if one Arg
-        rect11 = Rectangle(1, 2, 0, 1)
-        with self.assertRaises(TypeError):
-            rect11.display(12)
+    def area(self):
+        """Returns the area value of the Rectangle instance"""
+        return self.__width * self.__height
 
-    def test_toDictionaryOutput(self):
-        # normal return dict
-        rect12 = Rectangle(8, 2, 1, 9, 5)
-        answer = {'width': 8, 'height': 2, 'x': 1, 'y': 9, 'id': 5}
-        self.assertDictEqual(answer, rect12.to_dictionary())
+    def display(self):
+        """Prints in stdout the Rectangle instance with the character #"""
+        print(("\n") * self.__y, end="")
+        for column in range(self.__height):
+            print((" ") * self.__x, end="")
+            for row in range(self.__width):
+                print("#", end="")
+            print()
 
-    def test_uptdateOneArg(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(54)
-        self.assertEqual("[Rectangle] (54) 1/1 - 1/1", str(rect13))
+    def update(self, *args, **kwargs):
+        """Update the Rectangle
 
-    def test_uptdateTwoArg(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(54, 12)
-        self.assertEqual("[Rectangle] (54) 1/1 - 12/1", str(rect13))
+        Args:
+            *args (ints): New attribute values
+                In order : id, width, height, x, y
+            **kwargs (dict):
+                1st argument = id attribute
+                2nd argument = width attribute
+                3rd argument = height attribute
+                4th argument = x attribute
+                5th argument = y attribute
+        """
+        if args is not None and len(args) > 0:
+            if len(args) > 0:
+                self.id = args[0]
+            if len(args) > 1:
+                self.width = args[1]
+            if len(args) > 2:
+                self.height = args[2]
+            if len(args) > 3:
+                self.x = args[3]
+            if len(args) > 4:
+                self.y = args[4]
+        else:
+            for key in kwargs:
+                if key == "id":
+                    self.id = kwargs[key]
+                if key == "width":
+                    self.width = kwargs[key]
+                if key == "height":
+                    self.height = kwargs[key]
+                if key == "x":
+                    self.x = kwargs[key]
+                if key == "y":
+                    self.y = kwargs[key]
 
-    def test_uptdateThreeArg(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(54, 12, 24)
-        self.assertEqual("[Rectangle] (54) 1/1 - 12/24", str(rect13))
+    def to_dictionary(self):
+        """Returns the dictionary representation of a Rectangle"""
+        return {"x": self.x, "y": self.y, "id": self.id,
+                "height": self.height, "width": self.width}
 
-    def test_uptdateForArg(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(54, 12, 24, 8)
-        self.assertEqual("[Rectangle] (54) 8/1 - 12/24", str(rect13))
-
-    def test_uptdateFiveArg(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(54, 12, 24, 8, 5)
-        self.assertEqual("[Rectangle] (54) 8/5 - 12/24", str(rect13))
-
-    def test_uptdateOneKwargs(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(**{"width": 2})
-        self.assertEqual("[Rectangle] (1) 1/1 - 2/1", str(rect13))
-
-    def test_uptdateTwoKwargs(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(**{'width': 2, 'height': 24})
-        self.assertEqual("[Rectangle] (1) 1/1 - 2/24", str(rect13))
-
-    def test_uptdateThreeKwargs(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(**{'width': 2, 'height': 24, 'id': 48})
-        self.assertEqual("[Rectangle] (48) 1/1 - 2/24", str(rect13))
-
-    def test_uptdateForKwargs(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(**{'width': 2, 'x': 16, 'height': 24, 'id': 48})
-        self.assertEqual("[Rectangle] (48) 16/1 - 2/24", str(rect13))
-
-    def test_uptdateFiveKwargs(self):
-        # normal test update value of rectangle
-        rect13 = Rectangle(1, 1, 1, 1, 1)
-        rect13.update(**{'y': 2, 'width': 2, 'x': 16, 'height': 24, 'id': 48})
-        self.assertEqual("[Rectangle] (48) 16/2 - 2/24", str(rect13))
-
-
-class Test_Base_Create(unittest.TestCase):
-    # test method class Base to create
-
-    def test_createRectangle(self):
-        rect14 = Rectangle(14, 14, 14, 14, 14)
-        rect14_dict = rect14.to_dictionary()
-        rect15 = Rectangle.create(**rect14_dict)
-        self.assertEqual("[Rectangle] (14) 14/14 - 14/14", str(rect14))
-
-    def test_createRectangleNew(self):
-        rect14 = Rectangle(14, 14, 14, 14, 14)
-        rect14_dict = rect14.to_dictionary()
-        rect15 = Rectangle.create(**rect14_dict)
-        self.assertEqual("[Rectangle] (14) 14/14 - 14/14", str(rect15))
-
-    def test_createRectangleDiffFirst(self):
-        rect14 = Rectangle(14, 14, 14, 14, 14)
-        rect14_dict = rect14.to_dictionary()
-        rect15 = Rectangle.create(**rect14_dict)
-        self.assertIsNot(rect15, rect14)
-
-    def test_createRectangleNotEqualFirst(self):
-        rect14 = Rectangle(14, 14, 14, 14, 14)
-        rect14_dict = rect14.to_dictionary()
-        rect15 = Rectangle.create(**rect14_dict)
-        self.assertNotEqual(rect15, rect14)
-
-
-class Test_Base_MethodeWithFile(unittest.TestCase):
-    # test method class Base save to file
-    # before testing, remove any create file
-
-    @classmethod
-    def tearDown(self):
-        """Delete file"""
-        try:
-            os.remove("Rectangle.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Square.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Base.json")
-        except IOError:
-            pass
-
-    def test_RectangleSaveToFileNone(self):
-        # save to file if no list_obj
-        Rectangle.save_to_file(None)
-        with open("Rectangle.json", "r") as file:
-            self.assertTrue("[]", file.read())
-
-    def test_RectangleSaveToFile_none(self):
-        # test2 save to file if no list_obj
-        self.assertEqual(Rectangle.save_to_file(None), None)
-
-    def test_RectangleSaveToFileEmpty(self):
-        # save to file if empty list_obj
-        Rectangle.save_to_file([])
-        with open("Rectangle.json", "r") as file:
-            self.assertTrue("[]", file.read())
-
-    def test_RectangleSaveToFile_empty(self):
-        # test2 save to file if empty list_obj
-        self.assertEqual(Rectangle.save_to_file([]), None)
-
-    def test_OneRectangleSaveToFile(self):
-        # save 1 rect to file
-        rect16 = Rectangle(12, 6, 2, 4, 8)
-        Rectangle.save_to_file([rect16])
-        with open("Rectangle.json", "r") as file:
-            self.assertTrue(len(file.read()) == 53)
-
-    def test_TwoRectangleSaveToFile(self):
-        # save 2 rect to file
-        rect16 = Rectangle(12, 6, 2, 4, 8)
-        rect17 = Rectangle(24, 48, 16, 8, 25)
-        Rectangle.save_to_file([rect16, rect17])
-        with open("Rectangle.json", "r") as file:
-            self.assertTrue(len(file.read()) == 109)
-
-    def test_NoArgSaveToFile(self):
-        # if no args
-        with self.assertRaises(TypeError):
-            Rectangle.save_to_file()
-
-    def test_RectangleLoadFromFileNoFile(self):
-        # if file doesn't exist
-        answer = Rectangle.load_from_file()
-        path = Path('Rectangle.json')
-        self.assertFalse(path.is_file())
-
-    def test_RectangleLoadFromFileExistFile(self):
-        # if file exist
-        rect18 = Rectangle(12, 6, 2, 4, 54)
-        rect19 = Rectangle(48, 16, 8, 25, 78)
-        Rectangle.save_to_file([rect18, rect19])
-        answer = Rectangle.load_from_file()
-        self.assertTrue(all(type(form)) == Rectangle for form in answer)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    def __str__(self):
+        """Return description of the rectangle"""
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y}\
+ - {self.width}/{self.height}"

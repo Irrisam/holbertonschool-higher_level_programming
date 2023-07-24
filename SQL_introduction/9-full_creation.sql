@@ -1,6 +1,6 @@
 -- create new table with rows 
 CREATE TABLE IF NOT EXISTS second_table (id int, name varchar(256), score int),
-INSERT INTO second_table (
+INSERT INTO second_table VALUES (
     (1,"John", 10),
     (2, "Alex", 3),
     (3, "Bob", 14),

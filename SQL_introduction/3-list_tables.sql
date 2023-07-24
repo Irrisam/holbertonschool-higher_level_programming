@@ -1,3 +1,3 @@
 --show qall tables
 
-SHOW TABLES
+SHOW TABLES;

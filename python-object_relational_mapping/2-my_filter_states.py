@@ -14,12 +14,9 @@ if __name__ == "__main__":
         )
     search_value = sys.argv[4]
     cur = db.cursor()
-    cur.execute("SELECT * FROM states ORDER BY states.id")
+    cur.execute("SELECT * FROM states WHERE states.name LIKE BINARY %s ORDER BY states.id", (sys.argv[4],))
     rows = cur.fetchall()
     for row in rows:
-        if row[1] == search_value:
-            print(row)
-        else:
-            pass
+        print(row)
     cur.close()
     db.close()

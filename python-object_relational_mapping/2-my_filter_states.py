@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""A script that takes in an argument and displays all values in the states
-table of hbtn_0e_0_usa where name matches the argument"""
+"""a script that lists all states with a name starting with N"""
 
 import MySQLdb
 import sys
@@ -12,21 +11,14 @@ if __name__ == "__main__":
         user=sys.argv[1],
         passwd=sys.argv[2],
         db=sys.argv[3]
-    )
-
-    cursor = db.cursor()
-    cursor.execute(
-        """
-        SELECT *
-        FROM states
-        WHERE states.name LIKE BINARY %s
-        ORDER BY states.id
-        """, (sys.argv[4],)
-    )
-
-    rows = cursor.fetchall()
+        )
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states ORDER BY states.id")
+    rows = cur.fetchall()
     for row in rows:
-        print(row)
-
-    cursor.close()
+        if row[1].startswith("N"):
+            print(row)
+        else:
+            pass
+    cur.close()
     db.close()

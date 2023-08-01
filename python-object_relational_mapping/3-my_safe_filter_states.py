@@ -16,15 +16,12 @@ if __name__ == "__main__":
     )
 
     cursor = db.cursor()
-
-    # Use parameterized query with placeholder (%s)
     query = """
     SELECT *
     FROM states
     WHERE states.name LIKE BINARY %s
     ORDER BY states.id
     """
-    # Pass the argument as a tuple to execute()
     cursor.execute(query, (sys.argv[4],))
 
     rows = cursor.fetchall()

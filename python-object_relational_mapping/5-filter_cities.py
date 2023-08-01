@@ -24,8 +24,8 @@ if __name__ == "__main__":
     name = []
     for row in rows:
         name.append(row[0])
-        output = ", ".join(name)
-
+    output = ", ".join(name)
     print(output)
+
     cur.close()
     db.close()

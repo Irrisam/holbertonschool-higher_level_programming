@@ -14,13 +14,15 @@ if __name__ == "__main__":
     )
 
     cur = db.cursor()
-    query = """
-    SELECT cities.id, cities.name, states.name
-    FROM cities
-    JOIN states ON cities.state_id = states.id
-    ORDER BY cities.id
-    """
-    cur.execute(query)
+
+    cur.execute(
+        """
+        SELECT cities.id, cities.name, states.name
+        FROM cities
+        JOIN states ON cities.state_id = states.id
+        ORDER BY cities.id
+        """
+    )
 
     rows = cur.fetchall()
     for row in rows:

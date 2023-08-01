@@ -20,5 +20,8 @@ if __name__ == "__main__":
     states = session.query(State).filter(State.name.like('%a%')).order_by(State.id).all()
 
     # Print the id and name of each State object
-    for state in states:
-        print(state.name)
+    if states is None:
+        print("Nothing")
+    else:
+        for state in states:
+            print(state.name)

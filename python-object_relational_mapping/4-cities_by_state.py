@@ -13,12 +13,18 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
 
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM cities ORDER BY cities.id ASC")
+    cur = db.cursor()
+    query = """
+    SELECT cities.id, cities.name, states.name
+    FROM cities
+    JOIN states ON cities.state_id = states.id
+    ORDER BY cities.id
+    """
+    cur.execute(query)
 
-    rows = cursor.fetchall()
+    rows = cur.fetchall()
     for row in rows:
         print(row)
 
-    cursor.close()
     db.close()
+    cur.close()

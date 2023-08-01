@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Lists all State objects from the database hbtn_0e_6_usa"""
+"""Prints the State object with the name passed
+as argument from the database hbtn_0e_6_usa"""
 
 from model_state import Base, State
 from sqlalchemy import create_engine
@@ -12,22 +13,15 @@ if __name__ == "__main__":
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:\
                             3306/{}'.format(sys.argv[1],
                                             sys.argv[2],
-                                            sys.argv[3]))
+                                            sys.argv[3],
+                                            sys.argv[4]))
 
-    """Create a session to interact with the database"""
+    """Create a session to interact with the database and Query"""
     session = Session(engine)
-    """Query all State objects"""
-    query = sys.argv[4]
-    search_name = query
-    try :
-        states = session.query(State).filter(State.name == search_name).order_by(State.id).all()
-        if len(states) == 0:
-            print("Not Found")
-        elif states is None:
-            print("Nothing")
-        else:
-            """Print the id and name of each State object"""
-            for state in states:
-                print(state.id)
-    except: 
-        print("oops")
+    """filter() and first()"""
+    states = session.query(State).filter(State.name == sys.argv[4]).first()
+
+    if states is None:
+        print("Not found")
+    else:
+        print(states.id)

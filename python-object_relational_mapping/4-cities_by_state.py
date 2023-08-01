@@ -13,13 +13,12 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
 
-    cur = db.cursor()
-query = "SELECT * FROM cities ORDER BY cities.id ASC"
-cur.execute(query)
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM cities ORDER BY cities.id ASC")
 
-rows = cur.fetchall()
-for row in rows:
-    print(row)
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
 
-db.close()
-cur.close()
+    cursor.close()
+    db.close()

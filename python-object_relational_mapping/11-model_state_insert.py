@@ -17,7 +17,6 @@ if __name__ == "__main__":
 
     """Create a session to interact with the database and Query"""
     session = Session(engine)
-    """filter() and first()"""
     new_state = State(name="Louisiana")
     session.add(new_state)
     session.commit()

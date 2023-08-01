@@ -22,7 +22,6 @@ if __name__ == "__main__":
     if old_name is None:
         print("Nothing")
     else:
-        print("success")
         updated_name = "New Mexico"
         old_name.name = updated_name
         session.commit()

@@ -14,7 +14,6 @@ if __name__ == "__main__":
     )
 
     cur = db.cursor()
-
     cur.execute(
         """
         SELECT cities.id, cities.name, states.name
@@ -28,5 +27,5 @@ if __name__ == "__main__":
     for row in rows:
         print(row)
 
-    db.close()
     cur.close()
+    db.close()

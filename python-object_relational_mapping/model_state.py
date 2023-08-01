@@ -7,7 +7,7 @@ Base = declarative_base()
 
 
 class State(Base):
-    """ """
+    """instance for the states table"""
     __tablename__ = "states"
     """ primary key gives unique attributes non null and autogened"""
     id = Column(Integer, primary_key=True)

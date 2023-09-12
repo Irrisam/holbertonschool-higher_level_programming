@@ -7,4 +7,3 @@ add_item_button.addEventListener("click", function() {
     new_item.appendChild(text)
     list_tag.appendChild(new_item);
 })
-
